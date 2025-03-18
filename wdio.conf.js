@@ -8,11 +8,9 @@ exports.config = {
     capabilities: [{
         platformName: 'Android',
         'appium:deviceName': 'emulator-5554',
-        'appium:appPackage': 'com.ebay.mobile',
-        'appium:appActivity': 'com.ebay.mobile.activities.MainActivity',
+        
         'appium:automationName': 'UiAutomator2',
         'appium:noReset': true,
-        "appium:autoLaunch": true,
     }],
     logLevel: 'info',
     services: ['appium'],

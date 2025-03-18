@@ -1,20 +1,28 @@
 const { $ } = require('@wdio/globals');
 const Main = require('./main');
 
-/**
- * sub page containing specific selectors and methods for a specific page
- */
 class SearchResultPage extends Main {
-
+    /**
+     * define selectors
+     */
     resultItem(index) {
-        return $(`(//android.view.ViewGroup[@resource-id="com.ebay.mobile:id/search_item_card_details"])[${index}]`);
+        return `(//android.view.ViewGroup[@resource-id="com.ebay.mobile:id/search_item_card_details"])[${index}]`;
     }
 
-    async getItemPrice(index) {
-        const itemElement = this.resultItem(index);
-        const itemPriceElement = itemElement.$('android.widget.TextView[1]');
-        return await itemPriceElement.getText();
+    resultItemPrice(){
+        return `/android.widget.TextView[1]`;
     }
+
+    /**
+     * Gets the price of the item at the specified index in the search results
+     * @param {number} index - The index of the item in the search results
+     * @returns {Promise<string>} - The price of the item as a string
+     */
+    async getItemPrice(index) {
+        const itemPrice =  $(this.resultItem(index) + this.resultItemPrice());
+        return await itemPrice.getText();
+    }
+
 }
 
 module.exports = new SearchResultPage();

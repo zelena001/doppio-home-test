@@ -1,19 +1,20 @@
 const { $ } = require('@wdio/globals');
 const Main = require('./main');
 
-/**
- * sub page containing specific selectors and methods for a specific page
- */
 class SearchPage extends Main {
     /**
-     * define selectors using getter methods
+     * define selectors
      */
     get searchBarTextBox () {
         return $('//android.widget.AutoCompleteTextView[@resource-id="com.ebay.mobile:id/search_src_text"]');
     }
 
+    /**
+     * Enters the provided text into the search bar and submits the search
+     * @param {string} text - The text to enter into the search bar
+     */
     async searchWithText(text) {
-        await this.page.setElementTextAndSubmit(this.searchBarTextBox, text);
+        await this.setElementTextAndSubmit(this.searchBarTextBox, text);
     }
 }
 
